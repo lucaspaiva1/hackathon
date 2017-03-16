@@ -14,7 +14,7 @@ export class MyApp {
 
   constructor(platform: Platform, private localization: LocalizationService) {
     platform.ready().then(() => {
-      this.localization.getLocalization();
+      this.localization.get();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();

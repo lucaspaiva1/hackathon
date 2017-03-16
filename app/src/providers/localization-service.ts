@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { BackgroundGeolocation } from 'ionic-native';
+import { Injectable, NgZone } from '@angular/core';
+import { Geolocation, Geoposition, BackgroundGeolocation } from 'ionic-native';
+import 'rxjs/add/operator/filter';
 
 /*
   Generated class for the LocalizationService provider.
@@ -12,14 +11,64 @@ import { BackgroundGeolocation } from 'ionic-native';
 @Injectable()
 export class LocalizationService {
 
-  constructor(public http: Http) {
-    console.log('Hello LocalizationService Provider');
+  public watch: any;    
+  public lat: number = 0;
+  public lng: number = 0;
+ 
+  constructor(public zone: NgZone) {
+ 
+  }
+ 
+  startTracking() {
+ 
+  // Background Tracking
+ 
+  let config = {
+    desiredAccuracy: 0,
+    stationaryRadius: 20,
+    distanceFilter: 10, 
+    debug: true,
+    interval: 2000 
+  };
+ 
+  BackgroundGeolocation.configure(config);
+ 
+  // Turn ON the background-geolocation system.
+  BackgroundGeolocation.start();
+ 
+ 
+  // Foreground Tracking
+ 
+  let options = {
+    frequency: 300, 
+    enableHighAccuracy: true
+  };
+ 
+  this.watch = Geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
+ 
+    console.log(position);
+ 
+    // Run update inside of Angular's zone
+    this.zone.run(() => {
+      this.lat = position.coords.latitude;
+      this.lng = position.coords.longitude;
+    });
+ 
+  });
+ 
+}
+
+get(){
+  BackgroundGeolocation.getLocations().then(res=>{
+    alert(JSON.stringify(res));
+  });
+}
+ 
+  stopTracking() {
+ 
+ 
   }
 
-  public getLocalization(){
-    BackgroundGeolocation.getLocations().then(res=>{
-      alert(JSON.stringify(res));
-    });
-  }
+
 
 }
