@@ -16,8 +16,8 @@ var users = database.ref('/hackathon');
 
 var temp = {
     arc: 90,
-    color: 'yellow',
-    start: 0
+    color: 'purple',
+    start: 340
 };
 
 var ar = {
@@ -41,7 +41,9 @@ var porta = {
     start:170
 };
 
-var aux = false;
+database.ref('/hackathon/-KfOaJ1Tevv_LI99JFc8').update({trancar:false});
+
+
 
 users.on("value", function(snapshot){
         var devices = snapshot.val();
@@ -54,7 +56,7 @@ users.on("value", function(snapshot){
             if (user.ar){
                 ar = {
                     arc: 70,
-                    color: 'purple',
+                    color: 'rgba(255, 0, 100, 1)',
                     start: 270
                 };
             } else{
@@ -67,13 +69,13 @@ users.on("value", function(snapshot){
 
             if (user.cafe){
                 cafe = {
-                    arc: 60,
-                    color: 'brown',
+                    arc: 50,
+                    color: 'rgb(255,50,40)',
                     start: 70
                 };
             } else {
                 cafe = {
-                    arc: 60,
+                    arc: 50,
                     color: 'black',
                     start: 70
                 };
@@ -93,6 +95,33 @@ users.on("value", function(snapshot){
                 };
             }
 
+            if (user.trancar){
+                porta = {
+                arc: 90,
+                color: 'green',
+                start: '170'
+                };
+            }else {
+                porta = {
+                arc: 90,
+                color: 'red',
+                start: '170'
+                };
+            }
+
+            var test = user.tempD;
+            test = test - 6;
+            test = test / 2;
+            test = parseInt(test);
+
+            var brilho = 1;
+
+            temp = {
+                arc: 10 * test,
+                color: 'rgba(255, 0, 100, 0.1)',
+                start: 340
+            };
+
             matrix.led([ar, cafe, lamp, porta, temp]).render();
         });
         
@@ -100,22 +129,12 @@ users.on("value", function(snapshot){
 
 matrix.service('face').start().then(function(data) {
     
-    porta = {
-        arc: 90,
-        color: 'green',
-        start: '170'
-    };
-    aux = true;
-    matrix.led([ar, cafe, lamp, porta, temp]).render();
+   
+    database.ref('/hackathon/-KfOaJ1Tevv_LI99JFc8').update({trancar:true});
+    
     setTimeout(function() {
-       if (!aux){
-        porta = {
-        arc: 90,
-        color: 'red',
-        start: '170'
-        };
-       }
-        matrix.led([ar, cafe, lamp, porta, temp]).render();
+      
+        
     }, 2000);
 });
 
