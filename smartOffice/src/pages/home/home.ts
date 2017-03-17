@@ -27,7 +27,7 @@ export class HomePage {
         orderByChild: '-KfO-37ylJz2qlkFgxxp'
       }
     });
-    
+
     console.log(this.teste);
 
   }
@@ -46,6 +46,10 @@ export class HomePage {
 
   localizar(){
     this.geoService.startTracking();
+  }
+
+  mudouTemp(){
+    //funcao chamada quando muda temp
   }
 
 }
