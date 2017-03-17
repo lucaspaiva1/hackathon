@@ -8,17 +8,17 @@
 
 <ion-content>
 
-  <ion-list *ngFor="let song of songs | async">
+  <ion-list *ngFor="let valorAtual of valor | async">
     <ion-grid>
       <ion-row>
         <ion-col col-10>
           <h5> Lâmpada </h5>
         </ion-col>
-        <ion-col *ngIf="!song.ligar" col-2>
-          <button ion-button color="secondary" (click)="lampada(song.ligar)">On</button>
+        <ion-col *ngIf="!valorAtual.lamp" col-2>
+          <button ion-button color="secondary" (click)="lampada(valorAtual.lamp)">On</button>
         </ion-col>
-        <ion-col *ngIf="song.ligar" col-2>
-          <button ion-button color="danger" (click)="lampada(song.ligar)">off</button>
+        <ion-col *ngIf="valorAtual.lamp" col-2>
+          <button ion-button color="danger" (click)="lampada(valorAtual.lamp)">off</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -26,6 +26,20 @@
 
   <ion-list>
     <h2> Ar-Condicionado - {{temp}}º </h2>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-10>
+          <h5> Automático </h5>
+        </ion-col>
+        <ion-col *ngIf="!valorAtual.ar" col-2>
+          <button ion-button color="secondary" (click)="ligarAr(valorAtual.ar)">On</button>
+        </ion-col>
+        <ion-col *ngIf="valorAtual.ar" col-2>
+          <button ion-button color="danger" (click)="ligarAr(valorAtual.ar)">off</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
     <ion-item>
       <ion-label [class]="autoAr ? 'normal' : 'dis'">Automático</ion-label>
       <ion-toggle [(ngModel)]="autoAr" (ionChange)="resetTemp()"></ion-toggle>
@@ -42,6 +56,7 @@
     </ion-item>
   </ion-list>
   <button ion-button color="danger" (click)="localizar()">localizacao</button>
+  <button ion-button color="secondary" (click)="salvarInstancia()">Salvar Localização</button>
   <p>{{geoService.lat}}</p>
   <p>{{geoService.lng}}</p>
 </ion-content>

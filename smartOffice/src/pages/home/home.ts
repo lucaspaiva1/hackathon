@@ -17,18 +17,17 @@ export class HomePage {
   private onOff: boolean = false;
   private onOffAr: boolean = false;
   private onOffCaf: boolean = false;
+  private key: string = "-KfOaJ1Tevv_LI99JFc8";
   private temp: number = 20;
-  private songs: FirebaseListObservable<any>;
-  private teste: FirebaseListObservable<any>;
+  private valor: FirebaseListObservable<any>;
   constructor(public navCtrl: NavController, af: AngularFire, private geoService: GeoService) {
-    this.songs = af.database.list('/users');
-    this.teste = af.database.list('/users/',{
-      query: {
-        orderByChild: '-KfO-37ylJz2qlkFgxxp'
+    this.valor = af.database.list('/hackathon');
+
+    this.valor.subscribe(x => {
+      if (x.length > 0) {
+        console.log(x[0].ligar);
       }
     });
-    
-    console.log(this.teste);
 
   }
 
@@ -36,16 +35,29 @@ export class HomePage {
     this.temp = 20;
   }
 
-  lampada(status, key) {
-    console.log(status);
+  lampada(status) {
     status = !status;
-    this.songs.update("-KfO-37ylJz2qlkFgxxp", {
-      ligar: status
+    this.valor.update(this.key, {
+      lamp: status
     });
   }
 
-  localizar(){
+  localizar() {
     this.geoService.startTracking();
+  }
+
+  salvarInstancia() {
+    this.valor.update(this.key, {
+      lat: this.geoService.lat,
+      lng: this.geoService.lng
+    });
+  }
+
+  ligarAr(status) {
+    status = !status;
+    this.valor.update(this.key, {
+      ar: status
+    });
   }
 
 }
