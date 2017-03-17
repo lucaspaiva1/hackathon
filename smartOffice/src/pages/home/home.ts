@@ -32,8 +32,12 @@ export class HomePage {
 
   }
 
-  resetTemp() {
-    this.temp = 20;
+
+  iniciarTemperatura() {
+    this.valor.update(this.key, {
+      tempD: this.temp
+    });
+
   }
 
   lampada(status) {
@@ -50,6 +54,16 @@ export class HomePage {
     });
   }
 
+  alterarTemperadura(alterar) {
+    let novo = this.temp + alterar;
+    if (novo <= 24 && novo >= 6) {
+      this.temp = novo;
+      this.valor.update(this.key, {
+        tempD: novo
+      });
+    }
+  }
+
   localizar() {
     this.geoService.startTracking();
   }
@@ -63,14 +77,17 @@ export class HomePage {
 
   ligarAr(status) {
     status = !status;
+    if (!status) {
+      this.valor.update(this.key, {
+        tempD: 6
+      });
+    } else{
+      this.iniciarTemperatura();
+    }
     this.valor.update(this.key, {
       ar: status
     });
 
-    this.valor.subscribe(x => {
-      this.geoService.Servidorlat = x[0].lat;
-      this.geoService.Servidorlng = x[0].lng;
-    });
   }
 
   mudouTemp() {
@@ -83,6 +100,16 @@ export class HomePage {
   automaticoAr(status) {
     this.automatico = status;
     this.geoService.automatico = status;
+    this.valor.subscribe(x => {
+      this.geoService.Servidorlat = x[0].lat;
+      this.geoService.Servidorlng = x[0].lng;
+    });
+  }
+
+  trancarPorta() {
+    this.valor.update(this.key, {
+      trancar: false
+    });
   }
 
 
