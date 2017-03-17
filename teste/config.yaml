@@ -5,3 +5,6 @@ name: teste
 description: gsa
 keywords: ds
 displayName: Teste
+sensors:
+  - temperature
+  - uv

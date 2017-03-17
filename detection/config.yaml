@@ -1,0 +1,12 @@
+# do not touch this line
+configVersion: 2
+
+name: detection
+description: as
+keywords: as
+displayName: Detection
+services:
+  faceTest:                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    engine: detection
+    type: face
+  

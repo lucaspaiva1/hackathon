@@ -8,6 +8,6 @@ var options = {
 };
 
 matrix.init('temperature', options).then(function(data){
-    console.log(data.value);
+    console.log(data);
   //see below for data formats
 });
