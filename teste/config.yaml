@@ -5,3 +5,13 @@ name: teste
 description: gsa
 keywords: ds
 displayName: Teste
+services:
+  faceTest:
+    engine: detection
+    type: face
+  faceDemo:
+      engine: recognition
+      type: face
+  fistWatch:
+    engine: gesture
+    type: palm

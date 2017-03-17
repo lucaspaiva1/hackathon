@@ -1,13 +1,8 @@
-// app code goes here
-// matrix.init()....
-//
-// have fun
-var options = {
-  refresh: 1000, //milliseconds
-  timeout: 1000 //milliseconds
-};
+matrix.led('red').render();
 
-matrix.init('temperature', options).then(function(data){
-    console.log(data.value);
-  //see below for data formats
-});
+  matrix.service('face').start().then(function(data){
+    matrix.led('green').render();
+    setTimeout(function() {
+      matrix.led('red').render();
+    }, 1000);
+  });
