@@ -70,4 +70,8 @@ export class GeoService {
     return deg * (Math.PI / 180)
   }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c88358296bbb4a953e878d9d10b7861fbd38fa9e

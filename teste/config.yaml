@@ -5,6 +5,13 @@ name: teste
 description: gsa
 keywords: ds
 displayName: Teste
+<<<<<<< HEAD
 sensors:
   - temperature
   - uv
+=======
+services:
+  faceTest:
+    engine: detection
+    type: face
+>>>>>>> c88358296bbb4a953e878d9d10b7861fbd38fa9e

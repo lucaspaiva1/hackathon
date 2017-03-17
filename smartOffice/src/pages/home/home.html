@@ -39,7 +39,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
       <ion-item>
         <ion-label [class]="autoAr ? 'normal' : 'dis'">Automático</ion-label>
         <ion-toggle [(ngModel)]="autoAr" (ionChange)="resetTemp()"></ion-toggle>
@@ -49,7 +48,7 @@
         <ion-toggle [(ngModel)]="onOffAr"></ion-toggle>
       </ion-item>
       <ion-item *ngIf="(onOffAr && !autoAr)">
-        <ion-range min="18" max="30" step="1" snaps="true" [(ngModel)]="temp" color="danger">
+        <ion-range min="18" max="30" step="1" snaps="true" [(ngModel)]="temp" color="danger" (ionChange)="mudouTemp()">
           <ion-icon range-left small color="danger" name="thermometer"></ion-icon>
           <ion-icon range-right color="danger" name="thermometer"></ion-icon>
         </ion-range>

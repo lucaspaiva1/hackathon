@@ -28,6 +28,11 @@ export class HomePage {
         console.log(x[0].ligar);
       }
     });
+<<<<<<< HEAD
+=======
+
+    console.log(this.teste);
+>>>>>>> c88358296bbb4a953e878d9d10b7861fbd38fa9e
 
   }
 
@@ -58,6 +63,11 @@ export class HomePage {
     this.valor.update(this.key, {
       ar: status
     });
+  }
+  
+  mudouTemp(){
+    //funcao chamada quando muda temp
+
   }
 
 }
