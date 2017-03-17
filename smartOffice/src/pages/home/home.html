@@ -16,10 +16,10 @@
             <h5> Lâmpada </h5>
           </ion-col>
           <ion-col *ngIf="!valorAtual.lamp" col-2>
-            <button ion-button color="secondary" (click)="lampada(valorAtual.lamp)">On</button>
+            <button ion-button color="secondary" (click)="lampada(valorAtual.lamp)" style="width: 50px">On</button>
           </ion-col>
           <ion-col *ngIf="valorAtual.lamp" col-2>
-            <button ion-button color="danger" (click)="lampada(valorAtual.lamp)">off</button>
+            <button ion-button color="danger" (click)="lampada(valorAtual.lamp)" style="width: 50px">Off</button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -31,26 +31,26 @@
             <h5> Cafeteira </h5>
           </ion-col>
           <ion-col *ngIf="!valorAtual.cafe" col-2>
-            <button ion-button color="secondary" (click)="cafe(valorAtual.cafe)">On</button>
+            <button ion-button color="secondary" (click)="cafe(valorAtual.cafe)" style="width: 50px">On</button>
           </ion-col>
           <ion-col *ngIf="valorAtual.cafe" col-2>
-            <button ion-button color="danger" (click)="cafe(valorAtual.cafe)">off</button>
+            <button ion-button color="danger" (click)="cafe(valorAtual.cafe)" style="width: 50px">Off</button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-list>
     <ion-list>
-      <h2> Ar-Condicionado: {{valorAtual.temp}}º / {{valorAtual.tempD}}º</h2>
+      <h2 style="padding-left: 5px"> Ar-Condicionado: {{valorAtual.temp}}º / {{valorAtual.tempD}}º</h2>
       <ion-grid>
         <ion-row>
           <ion-col col-10>
             <h5> Automático </h5>
           </ion-col>
           <ion-col *ngIf="!automatico" col-2>
-            <button ion-button color="secondary" (click)="automaticoAr(true)">On</button>
+            <button ion-button color="secondary" (click)="automaticoAr(true)" style="width: 50px">On</button>
           </ion-col>
           <ion-col *ngIf="automatico" col-2>
-            <button ion-button color="danger" (click)="automaticoAr(false)">off</button>
+            <button ion-button color="danger" (click)="automaticoAr(false)" style="width: 50px">Off</button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -60,10 +60,10 @@
             <h5> Liga/ Desliga </h5>
           </ion-col>
           <ion-col *ngIf="!valorAtual.ar" col-2>
-            <button ion-button color="secondary" (click)="ligarAr(valorAtual.ar)">On</button>
+            <button ion-button color="secondary" (click)="ligarAr(valorAtual.ar)" style="width: 50px">On</button>
           </ion-col>
           <ion-col *ngIf="valorAtual.ar" col-2>
-            <button ion-button color="danger" (click)="ligarAr(valorAtual.ar)">off</button>
+            <button ion-button color="danger" (click)="ligarAr(valorAtual.ar)" style="width: 50px">Off</button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -74,8 +74,14 @@
         </ion-range>
       </ion-item>
     </ion-list>
-    <button ion-button color="danger" (click)="localizar()">localizacao</button>
-    <button ion-button color="secondary" (click)="salvarInstancia()">Salvar Localização</button>
+    <ion-row>
+      <ion-col width-50>
+        <button ion-button color="danger" (click)="localizar()" style="width: 100%">localizacao</button>
+      </ion-col>
+      <ion-col width-50>
+      <button ion-button color="secondary" (click)="salvarInstancia()" style="width: 100%">Salvar Localização</button>
+      </ion-col>
+    </ion-row>
     <h5>Latitude atual </h5>{{geoService.lat}}
     <h5>Logintude atual </h5>{{geoService.lng}}
     <h5>Distancia atual </h5>{{geoService.dist}}

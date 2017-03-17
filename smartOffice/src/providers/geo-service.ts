@@ -19,6 +19,7 @@ export class GeoService {
   private valor: FirebaseListObservable<any>;
   private statusAr: boolean = false;
   public automatico: boolean = false;
+  public instanciaTemp;
 
   constructor(private af: AngularFire, public zone: NgZone) {
     console.log('Hello GeoService Provider');
@@ -48,17 +49,28 @@ export class GeoService {
     let watch = Geolocation.watchPosition(options);
     watch.subscribe((data) => {
       this.zone.run(() => {
+
         this.lat = data.coords.latitude;
         this.lng = data.coords.longitude;
         if (this.automatico) {
           this.dist = this.getDistanceFromLatLonInKm(this.lat, this.lng, this.Servidorlat, this.Servidorlng);
           if (this.dist > 0.005 && this.statusAr) {
+            this.valor.subscribe(x => {
+              this.instanciaTemp = x[0].tempD;
+
+            });
             this.valor.update(this.key, {
-              ar: false
+              ar: false,
+              cafe: false,
+              lamp: false,
+              trancar: false,
+              tempD: 6
             });
           } else if (this.dist <= 0.005 && !this.statusAr) {
             this.valor.update(this.key, {
-              ar: true
+              ar: true,
+              tempD: this.instanciaTemp
+
             });
           }
         }
