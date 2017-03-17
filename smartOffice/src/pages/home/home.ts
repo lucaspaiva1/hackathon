@@ -17,6 +17,7 @@ export class HomePage {
   private onOff: boolean = false;
   private onOffAr: boolean = false;
   private onOffCaf: boolean = false;
+  private automatico: boolean = false;
   private key: string = "-KfOaJ1Tevv_LI99JFc8";
   private temp: number = 20;
   private valor: FirebaseListObservable<any>;
@@ -28,11 +29,6 @@ export class HomePage {
         console.log(x[0].ligar);
       }
     });
-<<<<<<< HEAD
-=======
-
-    console.log(this.teste);
->>>>>>> c88358296bbb4a953e878d9d10b7861fbd38fa9e
 
   }
 
@@ -44,6 +40,13 @@ export class HomePage {
     status = !status;
     this.valor.update(this.key, {
       lamp: status
+    });
+  }
+
+  cafe(status) {
+    status = !status;
+    this.valor.update(this.key, {
+      cafe: status
     });
   }
 
@@ -63,11 +66,25 @@ export class HomePage {
     this.valor.update(this.key, {
       ar: status
     });
-  }
-  
-  mudouTemp(){
-    //funcao chamada quando muda temp
 
+    this.valor.subscribe(x => {
+      this.geoService.Servidorlat = x[0].lat;
+      this.geoService.Servidorlng = x[0].lng;
+    });
   }
+
+  mudouTemp() {
+    //funcao chamada quando muda temp
+    this.valor.update(this.key, {
+      tempD: this.temp
+    });
+  }
+
+  automaticoAr(status) {
+    this.automatico = status;
+    this.geoService.automatico = status;
+  }
+
+
 
 }
