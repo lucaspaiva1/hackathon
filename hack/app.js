@@ -138,3 +138,16 @@ matrix.service('face').start().then(function(data) {
     }, 2000);
 });
 
+var options = {
+    refresh: 20000, //milliseconds
+    timeout: 1000 //milliseconds
+};
+
+matrix.init('temperature', options).then(function(data) {
+    //see below for data formats
+    if (parseInt(temp) !== parseInt(data.value)){
+      temp =  parseInt(data.value);
+      console.log("temperatura: " + temp + "ºC");
+      database.ref('/hackathon/-KfOaJ1Tevv_LI99JFc8').update({temp:temp});
+    }
+});
