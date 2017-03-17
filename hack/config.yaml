@@ -1,0 +1,11 @@
+# do not touch this line
+configVersion: 2
+
+name: hack
+description: grupo
+keywords: grupo
+displayName: Hack
+services:
+  faceTest:
+    engine: detection
+    type: face
